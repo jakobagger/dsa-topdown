@@ -102,6 +102,7 @@ function keyDown(event){
   function canMove(pos){
     if (pos.x < 0 || pos.x > 484 ||
         pos.y < 0 || pos.y > 341){
+      player.moving = false;
       return false;
     } else {
       return true;
