@@ -32,4 +32,68 @@ body {
     background-image: url("images/characters/Character\ 8.png");
     background-size: 400% 400%;
     image-rendering: pixelated;
+    
+    animation-name: down;
+    
+}
+
+#player.animate {
+    animation-duration: 1s;
+    animation-timing-function: steps(4);
+    animation-iteration-count: infinite;
+}
+
+#player.down {
+    background-position: 0% 0%;
+    animation-name: down;
+}
+
+@keyframes down {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: -400% 0%;
+    }
+}
+
+#player.up {
+    background-position: 0% -100%;
+    animation-name: up;
+}
+
+@keyframes up {
+    from {
+        background-position: 0% -100%;
+    } to {
+        background-position: -400% -100%;
+    }
+    
+}
+
+#player.left {
+    background-position: 0% -200%;
+    animation-name: left;
+}
+
+@keyframes left {
+    from {
+        background-position: 0% -200%;
+    } to {
+        background-position: -400% -200%;
+    }
+}
+
+#player.right {
+    background-position: 0% -300%;
+    animation-name: right;
+}
+
+@keyframes right {
+    from {
+        background-position: 0% -300%;
+    } to {
+        background-position: -400% -300%;
+    }
+    
 }
