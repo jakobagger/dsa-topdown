@@ -2,8 +2,21 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-    background-color: lightgray;
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0; 
+    padding: 0;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    height: 100%;
 }
 
 #gamefield{
@@ -14,8 +27,85 @@ body {
 
 #background{
     grid-area: 1/1;
-    width: calc(16*32px);
-    height: calc(12*32px);
+    display: grid;
+    grid-template-columns: repeat(var(--GRID_WIDTH), max-content);
+}
+
+#background .tile {
+    width: var(--TILE_SIZE);
+    aspect-ratio: 1/1;
+
+    background-repeat: no-repeat;
+    background-size: 100%;
+    image-rendering: pixelated;
+}
+
+.tile.path {
+    background-image: url('./images/tiles/path.png')
+}
+
+.tile.grass {
+    background-image: url('./images/tiles/grass.png')
+}
+
+.tile.water {
+    background-image: url('./images/tiles/water.png')
+}
+
+.tile.tree {
+    background-image: url('./images/tiles/tree.png')
+}
+
+.tile.flower {
+    background-image: url('./images/tiles/flowers.png')
+}
+
+.tile.planks {
+    background-image: url('./images/tiles/floor_planks.png')
+}
+
+.tile.housewall {
+    background-image: url('./images/tiles/redwall.png')
+}
+
+.tile.pot {
+    background-image: url('./images/items/pot.png')
+}
+
+.tile.floor {
+    background-image: url('./images/tiles/floor_wood.png')
+}
+
+.tile.door {
+    background-image: url('./images/tiles/door.png')
+}
+
+.tile.fencehor {
+    background-image: url('./images/tiles/fence_hori.png')
+}
+
+.tile.fencever {
+    background-image: url('./images/tiles/fence_vert.png')
+}
+
+.tile.gold {
+    background-image: url('./images/items/gold.png')
+}
+
+.tile.chest {
+    background-image: url('./images/items/chest_closed.png')
+}
+
+.tile.wall {
+    background-image: url('images/tiles/wall.png');
+}
+
+.tile.mine {
+    background-image: url('images/tiles/mine.png');
+}
+
+.tile.lava {
+    background-image: url('images/tiles/lava.png');
 }
 
 #items {

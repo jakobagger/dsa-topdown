@@ -1,14 +1,90 @@
 "use strict"
 
 window.addEventListener("load", start);
-// CONTROLLER
 
 let lastTimeStamp = 0;
+
+const tiles = [
+  [1,4,4,4,4,0,3,0,0,2,2,2,0,3,3,3,3],
+  [1,1,1,1,1,1,1,1,2,2,2,2,0,0,0,0,0],
+  [3,3,3,0,0,1,1,1,2,2,2,2,0,0,0,0,0],
+  [3,3,3,0,0,1,1,1,2,2,2,2,0,0,0,0,0],
+  [3,3,3,0,0,1,1,1,2,2,2,2,0,0,0,0,0],
+  [3,3,3,0,0,1,1,1,2,2,2,2,0,0,0,0,0],
+  [3,3,3,0,0,1,1,1,2,2,2,2,0,0,0,0,0],
+  [3,3,3,0,0,1,1,1,2,2,2,2,0,0,0,0,0],
+  [3,3,3,0,0,1,1,1,2,2,2,2,0,0,0,0,0],
+  [3,3,3,0,0,1,1,1,2,2,2,2,0,0,0,0,0],
+  [3,3,3,0,0,1,1,1,2,2,2,2,0,0,0,0,0],
+  [3,3,3,0,0,1,1,1,2,2,2,2,0,0,0,0,0],
+]
+
+const GRID_HEIGHT = tiles.length;
+const GRID_WIDTH = tiles[0].length;
+const TILE_SIZE = 32;
+
+function createTiles(){
+  const background = document.getElementById("background");
+
+  for(let i=0; i < GRID_HEIGHT; i++){
+     for(let j=0; j < GRID_WIDTH; j++){
+      const tile = document.createElement("tile");
+      tile.classList.add("tile");
+      background.append(tile);
+     } 
+  }
+  background.style.setProperty("--GRID_WIDTH", GRID_WIDTH);
+  background.style.setProperty("--GRID_HEIGHT", GRID_HEIGHT);
+  background.style.setProperty("--TILE_SIZE", TILE_SIZE+"px");
+}
+
+function displayTiles(){ 
+  const visualTiles = document.querySelectorAll("#background .tile");
+
+  for(let i = 0; i < GRID_HEIGHT; i++){
+      for(let j = 0; j < GRID_WIDTH; j++){
+          const modelTile = getTileAtCoord( {row: i, col: j} )
+          const visualTile = visualTiles[i * GRID_WIDTH + j];
+
+          visualTile.classList.add( getClassForTileType( modelTile ));
+      }
+  }
+}
+
+function getClassForTileType(tiletype){
+  switch(tiletype){
+      case 0: return "grass";
+      case 1: return "path";
+      case 2: return "water";
+      case 3: return "tree";
+      case 4: return "flower";
+      case 5: return "planks";
+      case 6: return "housewall";
+      case 7: return "pot";
+      case 8: return "floor";
+      case 9: return "door";
+      case 10: return "fencehor";
+      case 11: return "fencever";
+      case 12: return "gold";
+      case 13: return "chest";
+      case 14: return "abyss";
+      case 15: return "cliff";
+      case 16: return "floor_carpet";
+      case 17: return "mine";
+      case 18: return "wall";
+      case 19: return "gate";
+      //default: return "unknown";
+  }
+}
+
+
 
 function start(){
     document.addEventListener('keydown', keyDown);
     document.addEventListener('keyup', keyUp);
     requestAnimationFrame(tick);
+    createTiles();
+    displayTiles();
     console.log("Ready to go");
 }
 
@@ -21,6 +97,24 @@ function tick(timestamp){
     movePlayer(deltaTime);
     displayPlayerAtPosition();
     displayPlayerAnimation();
+}
+
+function getTileAtCoord( {row, col} ){
+  return tiles[row][col];
+}
+
+function coordFromPos({x, y}){
+  const row = Math.floor(y/TILE_SIZE);
+  const col = Math.floor(x/TILE_SIZE);
+  const coord = {row, col}
+  return coord;
+}
+
+function posFromCoord( {row, col} ){
+  const x = col * TILE_SIZE;
+  const y = row * TILE_SIZE;
+  const pos = { x, y };
+  return pos;
 }
 
 // MODEL
